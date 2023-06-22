@@ -12,8 +12,6 @@ Tailwind is a paradigm shift for how you'll use CSS in your _all_ of your web ap
 
 And so much more. Writing CSS classes like this is almost _too_ verbose since it seems to violate DRY but it does not. Instead, this verboseness unlocks a clarity in how you document your CSS classes and how things are rendered. 
 
-In this [course](https://www.codingforentrepreneurs.com/courses/django-x-tailwindcss/), we will learn how to setup Django project to leverage Tailwind.css from scratch.
-
 
 __References__
 - [Django Docs](https://djangoproject.com)
