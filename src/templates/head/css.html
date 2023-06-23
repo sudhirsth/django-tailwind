@@ -1,3 +1,8 @@
+{% load compress %}
 {% load static %}
 
+
+{% compress css %}
+
 <link rel="stylesheet" href="{% static 'css/core-ui.css' %}" />
+{% endcompress %}

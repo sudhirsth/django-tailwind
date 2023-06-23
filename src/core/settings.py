@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.account',
-    'apps.blog'
+    'apps.blog',
+    'compressor',
     
 ]
 
@@ -72,6 +73,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+#Configure Compressor
+COMPRESS_ROOT = BASE_DIR / 'static'
+
+COMPRESS_ENABLED = True
+
+STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -86,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'django_tailwind', 
         'USER': 'postgres', 
-        'PASSWORD': 'ss@123',
+        'PASSWORD': 'MoteyRaMutu@32',
         'HOST': '127.0.0.1', 
         'PORT': '5432',
     }
