@@ -1,6 +1,9 @@
 .DS_Store
 local-cdn/
 
+# Cached CSS
+**/CACHE
+
 # Logs
 logs
 *.log
