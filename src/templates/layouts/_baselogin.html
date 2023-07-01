@@ -1,0 +1,24 @@
+{% load compress %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Django + Tailwind CSS + Flowbite</title>
+
+    {% include 'head/css.html' %}
+  </head>
+
+  <body
+    class="min-h-screen bg-background font-sans antialiased"
+    onload="themeswitcher()"
+  >
+    <main class="flex-1">{% block content %} {% endblock content %}</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
+    {% include '../components/themechecker.html' %} 
+    {% include '../components/footer.html' %}
+  </body>
+</html>

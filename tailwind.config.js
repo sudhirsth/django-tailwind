@@ -1,19 +1,19 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require('tailwindcss/colors')
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: [
     "./src/templates/**/*.{html,js}",
-    "./node_modules/flowbite/**/*.js"
+    "./node_modules/flowbite/**/*.js",
   ],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     colors: {
       white: colors.white,
       black: colors.black,
       cfe: "#007cae",
       cfeBlue: {
-        100: "#007cad"
+        100: "#007cad",
       },
       stone: colors.stone,
       sky: colors.sky,
@@ -52,9 +52,37 @@ module.exports = {
         foreground: "hsl(var(--card-foreground))",
       },
     },
-    extend: {},
+    screens: {
+      sm: "480px",
+      md: "768px",
+      lg: "976px",
+      xl: "1440px",
+      "2xl": "1536px",
+    },
+    fontFamily: {
+      body: [
+        "Inter",
+        "ui-sans-serif",
+        "system-ui",
+        // other fallback fonts
+      ],
+      sans: [
+        "Inter",
+        "ui-sans-serif",
+        "system-ui",
+        // other fallback fonts
+      ],
+    },
+    extend: {
+      spacing: {
+        128: "32rem",
+        144: "36rem",
+      },
+      borderRadius: {
+        "4xl": "2rem",
+      },
+      extend: {},
+    },
   },
-  plugins: [
-    require('flowbite/plugin')
-  ],
-}
+  plugins: [require("flowbite/plugin")],
+};

@@ -1,0 +1,35 @@
+{% load compress %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Django + Tailwind CSS + Flowbite</title>
+
+    {% include 'head/css.html' %} {% include 'head/js.html' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
+  </head>
+
+  <body class="bg-background font-sans antialiased" onload="themeswitcher()">
+    <!-- Load Nav Bar Here -->
+    <div class="flex min-h-screen flex-col">
+      <header
+        class="sticky top-0 z-0 flex-none mx-auto w-full border-b border-gray-200 dark:border-gray-700"
+      >
+        {% include '../components/navbar.html' %}
+      </header>
+      <!-- Load landing page here -->
+      <main class="flex-1">{% block content %} {% endblock content %}</main>
+
+      <section id="toastmessages">
+        {% include '../components/toast.html' %}
+      </section>
+
+      {% include '../components/footer.html' %}
+    </div>
+
+    {% include '../components/themechecker.html' %}
+  </body>
+</html>
