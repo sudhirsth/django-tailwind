@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.access',
-    # 'apps.account',
+    'apps.user',    
     'apps.blog',
+    'apps.authorization',
     'compressor',
     
 ]
@@ -53,6 +53,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS=[
+    'django.contrib.auth.backends.ModelBackend'
+]
+
+AUTH_USER_MODEL = 'user.User'
+
 
 ROOT_URLCONF = 'core.urls'
 
@@ -93,7 +100,7 @@ DATABASES = {
     
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_tailwind', 
+        'NAME': 'django_tailwind_db', 
         'USER': 'postgres', 
         'PASSWORD': 'ss@123',
         'HOST': '127.0.0.1', 
@@ -120,7 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'access.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

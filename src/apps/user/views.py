@@ -1,9 +1,12 @@
+from typing import Any, Dict
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import LoginForm, RegisterForm
 from .models import UserProfile
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import View, TemplateView
+from .models import User
 
 
 def login_user(request):
@@ -26,7 +29,7 @@ def login_user(request):
             messages.error(
                 request, "Form is not valid. Please provide required fields.")
 
-    return render(request, "apps/access/login.html", {"form": form})
+    return render(request, "apps/user/login.html", {"form": form})
 
 
 def register_user(request):
@@ -47,7 +50,7 @@ def register_user(request):
     else:
         form = RegisterForm()
     context = {'form': form}
-    return render(request, "apps/access/register.html", context)
+    return render(request, "apps/user/register.html", context)
 
 
 def logout_view(request):
@@ -66,3 +69,17 @@ def user_profile(LoginRequiredMixin,request, pk):
         proifle = UserProfile.objects.get(user_id=pk)
         if request.method == "POST":
             current_user_profile = request.user.profile
+
+
+class user_list(LoginRequiredMixin,TemplateView):
+    template_name='apps/user/index.html'
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        # if user.is_superuser: #later check permission and if true list users with permission
+        user = User.objects.all()
+        print("Hello World From User Page")
+        context["users"]=user
+        return context
+

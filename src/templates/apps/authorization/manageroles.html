@@ -1,0 +1,329 @@
+{% extends '../../layouts/_basedashboard.html' %} {% block content %}
+
+<div class="p-20 sm:ml-64">
+  <div class="h-full overflow-y-auto">
+    <section class="">
+      <div class="block justify-between items-center md:flex">
+        <div class="flex shrink-0 grow-0 items-center justify-center">
+          <ul>
+            <li
+              class="inline-block pr-3 text-xl text-gray-600 last:pr-0 last:font-black last:text-gray-700 last: dark:text-gray-400 after:content-['/'] after:pl-3"
+            >
+              Role
+            </li>
+            <li
+              class="inline-block pr-3 text-xl text-gray-600 last:pr-0 last:font-black last:text-gray-700 last: dark:text-gray-400 after:content-['/'] last:after:content-['']"
+            >
+              Create
+            </li>
+          </ul>
+        </div>
+      </div>
+      <form
+        method="POST"
+        class="rounded-lg shadow-md border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 border mt-6"
+        action=""
+      >
+        {% csrf_token %}
+        <div class="">
+          <div
+            class="flex items-stretch border-b border-gray-100 dark:border-gray-700"
+          >
+            <p
+              class="flex items-center py-3 grow font-bold px-2 text-gray-600 dark:text-gray-300"
+            >
+              <span
+                class="inline-flex justify-center items-center w-6 h-6 mr-3"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  class="inline-block"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13,9.5H18V7.5H13V9.5M13,16.5H18V14.5H13V16.5M19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21M6,11H11V6H6V11M7,7H10V10H7V7M6,18H11V13H6V18M7,14H10V17H7V14Z"
+                  ></path>
+                </svg>
+              </span>
+              General
+            </p>
+          </div>
+          <div class="px-6 pt-2 pb-6">
+            <div class="mb-6 last:mb-0">
+              <div
+                class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 mb-6 last:mb-0"
+              >
+                <div class="">
+                  <label
+                    class="block font-bold mb-2 text-gray-700 dark:text-gray-400"
+                    for="name"
+                    >Role Name*</label
+                  >
+                  <div class="relative text-gray-600">
+                    <input
+                      type="text"
+                      class="px-3 py-2 max-w-full rounded w-full h-12 border pl-10 bg-white focus:border-primary dark:focus:border-gray-200 focus:outline-none border-gray-700 dark:border-gray-500 dark:text-gray-300 dark:bg-gray-700"
+                      data-val="true"
+                      data-val-required="The Role Name* field is required."
+                      id="name"
+                      name="name"
+                      value=""
+                    />
+                    <span
+                      class="inline-flex justify-center items-center w-10 h-12 absolute top-0 left-0 z-10 pointer-events-none text-gray-500"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        class="inline-block"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <span
+                      class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 field-validation-valid"
+                      data-valmsg-for="name"
+                      data-valmsg-replace="true"
+                    ></span>
+                  </div>
+                </div>
+                <div class="">
+                  <label
+                    class="block font-bold mb-2 text-gray-700 dark:text-gray-400"
+                    for="alias"
+                    >Alias*</label
+                  >
+                  <div class="relative text-gray-600">
+                    <input
+                      type="text"
+                      class="px-3 py-2 max-w-full rounded w-full h-12 border pl-10 bg-white focus:border-primary dark:focus:border-gray-200 focus:outline-none border-gray-700 dark:border-gray-500 dark:text-gray-300 dark:bg-gray-700"
+                      data-val="true"
+                      data-val-required="The Role Name* field is required."
+                      id="alias"
+                      name="alias"
+                      value=""
+                    />
+                    <span
+                      class="inline-flex justify-center items-center w-10 h-12 absolute top-0 left-0 z-10 pointer-events-none text-gray-500"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        class="inline-block"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <span
+                      class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 field-validation-valid"
+                      data-valmsg-for="RoleName"
+                      data-valmsg-replace="true"
+                    ></span>
+                  </div>
+                </div>
+                <div class="">
+                  <label
+                    class="block font-bold mb-2 text-gray-700 dark:text-gray-400"
+                    for="is_active"
+                    >Status*</label
+                  >
+                  <div class="relative text-gray-600">
+                    <label class="relative inline-flex items-center mb-4 cursor-pointer">
+                      <input type="checkbox" name="is_active" value="{{ is_active }}" class="sr-only peer">
+                      <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                      <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Activate/Deactivate</span>
+                    </label>
+                    <span
+                      class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 field-validation-valid"
+                      data-valmsg-for="name"
+                      data-valmsg-replace="true"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-3 mx-6 border-t border-gray-100 dark:border-gray-700" />
+
+        <div>
+          <div
+            class="flex items-stretch border-b border-gray-100 dark:border-gray-700"
+          >
+            <p
+              class="flex items-center py-3 grow font-bold px-2 text-gray-600 dark:text-gray-300"
+            >
+              <span
+                class="inline-flex justify-center items-center w-6 h-6 mr-3"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  class="inline-block"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13,9.5H18V7.5H13V9.5M13,16.5H18V14.5H13V16.5M19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21M6,11H11V6H6V11M7,7H10V10H7V7M6,18H11V13H6V18M7,14H10V17H7V14Z"
+                  ></path>
+                </svg>
+              </span>
+              Role Permission Assignment
+            </p>
+          </div>
+          <div class="px-6 pt-2 pb-6">
+            <div class="mb-6 last:mb-0">
+              <div
+                class="grid grid-cols-1 gap-4 md:grid-cols-1 justify-center mb-12"
+              >
+                <!-- <div
+                  class="mb-4 border-b border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-400"
+                >
+                  <ul
+                    class="flex flex-wrap -mb-px text-sm font-medium text-center"
+                    id="myTab"
+                    data-tabs-toggle="#myTabContent"
+                    role="tablist"
+                  >
+                    <li class="mr-2" role="presentation">
+                      <button
+                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
+                        id="area4"
+                        data-tabs-target="#target4"
+                        type="button"
+                        role="tab"
+                        aria-controls="Dashboard"
+                        aria-selected="false"
+                      >
+                        Dashboard
+                      </button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                      <button
+                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
+                        id="area5"
+                        data-tabs-target="#target5"
+                        type="button"
+                        role="tab"
+                        aria-controls="Project Management"
+                        aria-selected="false"
+                      >
+                        Project Management
+                      </button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                      <button
+                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent text-gray-600 dark:text-gray-300 dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
+                        id="area6"
+                        data-tabs-target="#target6"
+                        type="button"
+                        role="tab"
+                        aria-controls="Blog Management"
+                        aria-selected="false"
+                      >
+                        Blog Management
+                      </button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                      <button
+                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent text-gray-600 dark:text-gray-300 dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
+                        id="area9"
+                        data-tabs-target="#target9"
+                        type="button"
+                        role="tab"
+                        aria-controls="Access Management"
+                        aria-selected="false"
+                      >
+                        Access Management
+                      </button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                      <button
+                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent text-gray-600 dark:text-gray-300 dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
+                        id="area10"
+                        data-tabs-target="#target10"
+                        type="button"
+                        role="tab"
+                        aria-controls="cPanel"
+                        aria-selected="false"
+                      >
+                        cPanel
+                      </button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                      <button
+                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent text-gray-600 dark:text-gray-300 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500"
+                        id="area11"
+                        data-tabs-target="#target11"
+                        type="button"
+                        role="tab"
+                        aria-controls="company"
+                        aria-selected="true"
+                      >
+                        company
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <div id="myTabContent"></div> -->
+                <div>
+                  <ul
+                    class="overflow-auto h-auto w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  >
+                    {% for permission in permissions %}
+                    <li
+                      class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                    >
+                      <div class="flex items-center pl-3">
+                        <input
+                          id="{{ permission.id }}"
+                          name="chk_permission"
+                          type="checkbox"
+                          value="{{ permission.id }}"
+                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                        />
+                        <label
+                          for="{{ permission.id }}"
+                          class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >{{ permission.content_type }} | {{ permission.name }}<label
+                        >
+                      </div>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-3 mx-6 border-t border-gray-100 dark:border-gray-700" />
+        <div class="px-6 pt-2 pb-6">
+          <button
+            type="submit"
+            class="px-8 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border-blue-700 hover:bg-blue-700 border border-transparent rounded-lg active:bg-blue-600 focus:outline-none focus:shadow-outline-purple"
+          >
+            Save
+          </button>
+          <a
+            class="mx-2 px-8 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border-red-700 hover:bg-red-700 border border-transparent rounded-lg active:bg-blue-600 focus:outline-none focus:shadow-outline-purple"
+            href="{% url 'roles' %}"
+          >
+            Cancel
+          </a>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+{% endblock content %}

@@ -8,8 +8,20 @@ class Category(models.Model):
 
     class Meta:
         # ordering = ["name"]
-        verbose_name='Category'
-        verbose_name_plural='Categories'
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+    def _str_(self):
+        return self.name
+
+
+class Tags(models.Model):
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        # ordering = ["name"]
+        verbose_name = 'Tags'
+        verbose_name_plural = 'Tags'
 
     def _str_(self):
         return self.name
@@ -25,23 +37,26 @@ class Post(models.Model):
         ('published', 'Published')
     )
 
-    category = models.ManyToManyField(Category, default=1)
+    category = models.ManyToManyField(
+        Category, default=1, db_table='blog_post_category_map')
+    tags = models.ManyToManyField(Tags, db_table='blog_post_tags_map')
+
     title = models.CharField(max_length=250)
     excerpt = models.TextField(null=True)
     content = models.TextField()
     slug = models.SlugField(max_length=250, unique_for_date='published')
     published = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blog_posts')
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blog_posts', db_constraint=True)
     status = models.CharField(
         max_length=10, choices=options, default='published')
 
     objects = models.Manager()  # default manager
 
     class Meta:
-        # ordering = ('-published')                        
-        verbose_name='Post'
-        verbose_name_plural='Posts'
+        # ordering = ('-published')
+        verbose_name = 'Post'
+        verbose_name_plural = 'Posts'
 
     # renames the instances of the model
         # with their title name

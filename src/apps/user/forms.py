@@ -1,3 +1,4 @@
+
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from .models import User, UserProfile
@@ -69,11 +70,3 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("email", "password1", "password2")
-
-
-# class ProfilePicForm(forms.ModelForm):
-#     profile_image = forms.ImageField(Label="Profile Picture")
-
-#     class Meta:
-#         model = UserProfile
-#         fields = ('profile_image',)

@@ -1,12 +1,8 @@
 from django.contrib import admin
-from django.forms import TextInput, Textarea, CharField
+from .forms import CustomUserChangeForm,CustomUserCreationForm
 from django.contrib.auth.admin import UserAdmin
-from django.db import models
-from .forms import CustomUserCreationForm, CustomUserChangeForm
-
 
 # Register your models here.
-
 from .models import User
 class UserAdminConfig(UserAdmin):
     add_form = CustomUserCreationForm
@@ -31,4 +27,3 @@ class UserAdminConfig(UserAdmin):
     ordering = ("email",)
 
 admin.site.register(User, UserAdminConfig)
-
