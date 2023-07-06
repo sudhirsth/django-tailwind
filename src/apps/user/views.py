@@ -9,7 +9,7 @@ from .models import UserProfile
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View, DeleteView, TemplateView, UpdateView, ListView, CreateView
 from .models import User
-from .forms import UserForm
+from .forms import UserForm, UserProfileForm, CustomUserForm
 from django.contrib.auth.models import Group
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
@@ -109,11 +109,31 @@ class user_list(LoginRequiredMixin, ListView):
 #     return context
 
 
-class add_user(LoginRequiredMixin, CreateView):
-    model = User
-    template_name = 'apps/user/user_create.html'
-    fields = ["email", "password", "groups"]
-    success_url = reverse_lazy('user:user_list')
+
+
+class update_userprofile(LoginRequiredMixin, UpdateView):
+    model = UserProfile
+    form_class = UserProfileForm
+    template_name = 'apps/user/user_profile.html'
+    success_url = reverse_lazy('user_profile')
+
+    def get_object(self, queryset=None):
+        user_profile, _ = UserProfile.objects.get_or_create(
+            user=self.request.user)
+        return user_profile
+
+    def form_valid(self, form):
+        user_profile = form.save(commit=False)
+        user_profile.user = self.request.user
+
+        if not user_profile.pk:
+            user_profile.save()
+
+        user_profile.user.first_name = form.cleaned_data['first_name']
+        user_profile.user.last_name = form.cleaned_data['last_name']
+        user_profile.user.save()
+        messages.success(self.request, "User profile saved successfully.")
+        return super().form_valid(form)
 
 
 class user_groups(LoginRequiredMixin, View):
@@ -158,6 +178,7 @@ class create_user(LoginRequiredMixin, CreateView):
         user.set_password(password)
         user.save()
         form.save_m2m()
+        messages.success(self.request,"User added successfully.")
         return super().form_valid(form)
 
     def form_invalid(self, form: BaseModelForm) -> HttpResponse:
@@ -175,4 +196,3 @@ class delete_user(LoginRequiredMixin, DeleteView):
             self.object.delete()
             return JsonResponse({'message': 'User deleted successfully'})
         return super().delete(request, *args, **kwargs)
-

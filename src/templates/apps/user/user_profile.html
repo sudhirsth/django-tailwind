@@ -1,0 +1,190 @@
+{% extends '../../layouts/_basedashboard.html' %} {% block content %}
+
+<div class="p-20 sm:ml-64">
+    <div class="h-full overflow-y-auto">
+        <div class="py-5">
+            {% include '../../components/alertmessage.html' %}
+        </div>
+        <section class="">
+            <div class="block justify-between items-center md:flex">
+                <div class="flex shrink-0 grow-0 items-center justify-center">
+                    <ul>
+                        <li
+                            class="inline-block pr-3 text-xl text-gray-600 last:pr-0 last:font-black last:text-gray-700 last: dark:text-gray-400 after:content-['/'] after:pl-3">
+                            User
+                        </li>
+                        <li
+                            class="inline-block pr-3 text-xl text-gray-600 last:pr-0 last:font-black last:text-gray-700 last: dark:text-gray-400 after:content-['/'] last:after:content-['']">
+                            Profile
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <form method="POST"
+                class="rounded-lg shadow-md border-gray-100 dark:border-gray-700 bg-background dark:bg-gray-800 border mt-6"
+                action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="">
+                    <div class="flex items-stretch border-b border-gray-100 dark:border-gray-700">
+                        <p class="flex items-center py-3 grow font-bold px-2 text-gray-600 dark:text-gray-300">
+                            <span class="inline-flex justify-center items-center w-6 h-6 mr-3">
+                                <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
+                                    <path fill="currentColor"
+                                        d="M13,9.5H18V7.5H13V9.5M13,16.5H18V14.5H13V16.5M19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21M6,11H11V6H6V11M7,7H10V10H7V7M6,18H11V13H6V18M7,14H10V17H7V14Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            General
+                        </p>
+                    </div>
+                    <div class="px-6 pt-2 pb-6">
+                        <div class="mb-6 last:mb-0">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 mb-6 last:mb-0">
+                                <div class="">
+                                    <label class="block font-bold mb-2 text-gray-700 dark:text-gray-400"
+                                        for="{{ form.first_name.id_for_label }}">First Name*</label>
+
+                                    <input type="text" name="first_name" placeholder="First Name"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required="" id="{{ form.first_name.id_for_label }}"
+                                        value='{{ form.first_name.value }}'>
+
+                                    <div class="relative">
+
+                                        {% if form.first_name.errors %}
+                                        <span
+                                            class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 field-validation-valid"
+                                            data-valmsg-for="name" data-valmsg-replace="true">
+                                            {{ form.first_name.errors }}
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="">
+                                    <label class="block font-bold mb-2 text-gray-700 dark:text-gray-400"
+                                        for="{{ form.last_name.id_for_label }}">Last Name*</label>
+                                    <input type="text" name="last_name" placeholder="Last Name"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required="" id="{{ form.last_name.id_for_label }}"
+                                        value='{{ form.last_name.value }}'>
+
+                                    <div class="relative">
+
+                                        {% if form.last_name.errors %}
+                                        <span
+                                            class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 field-validation-valid"
+                                            data-valmsg-for="name" data-valmsg-replace="true">
+                                            {{ form.last_name.errors }}
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <label class="block font-bold mb-2 text-gray-700 dark:text-gray-400"
+                                        for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+
+                                    {{ form.phone_number }}
+
+                                    <div class="relative">
+
+                                        {% if form.phone_number.errors %}
+                                        <span
+                                            class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 field-validation-valid"
+                                            data-valmsg-for="name" data-valmsg-replace="true">
+                                            {{ form.phone_number.errors }}
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="">
+                                    <label class="block font-bold mb-2 text-gray-700 dark:text-gray-400"
+                                        for="{{ form.gender.id_for_label }}">Gender*</label>
+
+                                    <!-- {{ form.gender }} -->
+
+
+                                    <select name="gender"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="">Select Gender</option>
+                                        {% for choice in form.gender.field.choices %}
+                                            {% with choice_value=choice.0 choice_label=choice.1 %}
+                                            <option value="{{ choice_value }}" 
+                                            {% if choice_value in form.gender.value %}selected{% endif %}>{{ choice_label }}</option>
+                                            {% endwith %}
+                                        {% endfor %}
+                                    </select>
+
+
+                                    <div class="relative">
+
+                                        {% if form.gender.errors %}
+                                        <span
+                                            class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 field-validation-valid"
+                                            data-valmsg-for="name" data-valmsg-replace="true">
+                                            {{ form.gender.errors }}
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="">
+                                    <label class="block font-bold mb-2 text-gray-700 dark:text-gray-400"
+                                        for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
+                                        
+                                    {{ form.profile_picture }}
+
+                                    <div class="relative">
+
+                                        {% if form.profile_picture.errors %}
+                                        <span
+                                            class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 field-validation-valid"
+                                            data-valmsg-for="name" data-valmsg-replace="true">
+                                            {{ form.profile_picture.errors }}
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+
+
+                                <div class="">
+                                    <label class="block font-bold mb-2 text-gray-700 dark:text-gray-400"
+                                        for="{{ form.about.id_for_label }}">About</label>
+
+                                    {{ form.about }}
+
+                                    <div class="relative">
+
+                                        {% if form.about.errors %}
+                                        <span
+                                            class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1 field-validation-valid"
+                                            data-valmsg-for="name" data-valmsg-replace="true">
+                                            {{ form.about.errors }}
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-3 mx-6 border-t border-gray-100 dark:border-gray-700" />
+
+                <div class="px-6 pt-2 pb-6">
+                    <button type="submit"
+                        class="px-8 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border-blue-700 hover:bg-blue-700 border border-transparent rounded-lg active:bg-blue-600 focus:outline-none focus:shadow-outline-purple">
+                        Save
+                    </button>
+                    <a class="mx-2 px-8 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border-red-700 hover:bg-red-700 border border-transparent rounded-lg active:bg-blue-600 focus:outline-none focus:shadow-outline-purple"
+                        href="{% url 'user_list' %}">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+{% endblock content %}

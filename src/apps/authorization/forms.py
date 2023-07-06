@@ -20,7 +20,7 @@ class RoleForm(forms.ModelForm):
 
     permissions = forms.ModelMultipleChoiceField(
         queryset=Permission.objects.all(),
-        widget = CheckboxSelectMultiple
+        widget = CustomCheckboxSelectMultiple
     )
     class Meta:
         model=Role

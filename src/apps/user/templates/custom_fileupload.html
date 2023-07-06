@@ -1,0 +1,43 @@
+<div class="">
+    <label class="block font-bold mb-2 text-gray-700 dark:text-gray-400" asp-for="ProfileImage"></label>
+    <div class="flex items-stretch justify-start relative">
+        <div x-data="{ files: [] }" class="flex items-stretch flex-col space-y-4 justify-start relative">
+            <label class="inline-flex">
+                <a class="inline-flex cursor-pointer justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border rounded ring-blue-700 p-2 bg-blue-600 text-white border-blue-700 hover:bg-blue-700"
+                    disabled="false">
+                    <span class="inline-flex justify-center items-center w-6 h-6">
+                        <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
+                            <path fill="currentColor" d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z"></path>
+                        </svg>
+                    </span>
+                    <span class="px-2">Upload Image for Profile</span>
+                </a>
+                
+                <input type="file"
+                    class="sr-only absolute top-0 left-0 w-full h-full opacity-0 outline-none cursor-pointer -z-1"
+                    id="customFile" x-on:change="files = Object.values($event.target.files)"
+                    name = "{{ widget.name }}">
+                <span class="inline-flex px-4 py-2 justify-center bg-background border rounded-r"
+                    x-show="files.length !== 0" x-text="files ? files.map(file => file.name) : 'No file...'"></span>
+                {% if widget.value %}
+                
+                <span class="inline-flex px-4 py-2 justify-center bg-background border rounded-r"
+                    x-show="files.length == 0">{{ widget.value }}</span>
+                {% endif %}
+            </label>
+            <template x-if="files.length != 0">
+                <div class="w-lg">
+                    <img :src="files.length != 0 ? URL.createObjectURL(files[0]) : ''"
+                        class="max-w-full h-auto object-contain">
+                </div>
+            </template>
+
+            {% if widget.value %}            
+            <div class="w-lg">
+                <img x-show="files.length == 0" class="max-w-full h-auto object-contain"
+                    src="{{ widget.value.url}}" alt="" />
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

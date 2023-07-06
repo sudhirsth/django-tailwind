@@ -47,11 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # user_name = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150, blank=True, null=True)
     last_name = models.CharField(max_length=150, blank=True, null=True)
-    date_joined = models.DateTimeField(auto_now_add=True)
-    gender = models.CharField(
-        max_length=1, choices=GENDER_CHOICES, null=True, blank=True)
-
-    phone_number = models.CharField(max_length=20, null=True, blank=True)
+    date_joined = models.DateTimeField(auto_now_add=True)    
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -85,12 +81,17 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_constraint=True, db_column='user_id'),
+        User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(
-        upload_to='profile_pictures/', null=True, blank=True)
+        upload_to='img/profile_pic/', null=True, blank=True)
     about = models.TextField(_(
         'about'), max_length=500, null=True, blank=True)
     date_modified = models.DateTimeField(User, auto_now=True)
+    
+    gender = models.CharField(
+        max_length=1, choices=GENDER_CHOICES, null=True, blank=True)
+    
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
 
     class Meta:
         db_table = "user_profile"

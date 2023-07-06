@@ -2,7 +2,7 @@
 
 
 
-<div class="p-20 sm:ml-64">
+<div class="py-20 sm:ml-64">
   <div class="h-full overflow-y-auto">
     <section class="p-4">
       <div class="block justify-between items-center md:flex">
@@ -22,7 +22,7 @@
         </div>
         <a type="button"
           class="inline-flex cursor-pointer justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border rounded ring-blue-700 p-2 bg-blue-600 text-white border-blue-700 hover:bg-blue-700"
-          disabled="false" href="{% url 'managegroups' %}">
+          disabled="false" href="{% url 'manage_groups' %}">
           <span class="inline-flex justify-center items-center w-5 h-5">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
               stroke="currentColor" stroke-width="2">
@@ -101,58 +101,33 @@
                     <tr
                       class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                       <th class="px-2 py-3">S.N.</th>
-                      <th class="px-2 py-3">Detail</th>
-                      <th class="px-2 py-3 text-center">Status</th>
+                      <th class="px-2 py-3">Name</th>
                       <th class="px-2 py-3">Action</th>
                     </tr>
                   </thead>
                   <tbody id="groupGridBody" class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+
+                    {% for group in groups %}
                     <tr class="text-gray-700 dark:text-gray-400 odd:bg-gray-50 dark:odd:bg-gray-700/25">
                       <td class="px-2 py-3">
                         <div class="">
-                          <span class="text-gray-600 dark:text-gray-400">1</span>
+                          <span class="text-gray-600 dark:text-gray-400">{{ group.id }}</span>
                         </div>
                       </td>
                       <td class="px-2 py-3">
                         <div class="flex items-center text-sm">
-                          <!-- Avatar with inset shadow -->
-                          <div x-show="false" class="relative hidden w-8 h-8 mr-4 rounded-full md:block"
-                            style="display: none;">
-                            <img x-show="false" class="object-fill w-full h-full rounded-full" src="undefined" alt=""
-                              loading="lazy" style="display: none;">
-                            <span x-show="false"
-                              class="p-2 text-xs font-semibold bg-teal-400 text-white rounded-full w-full h-full"
-                              style="display: none;">undefined</span>
-                            <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                          </div>
+
                           <div class="max-w-xs">
                             <!-- User Full Name -->
-                            <p class="text-gray-700 dark:text-gray-300 font-semibold">Basic</p>
-                            <!-- User post or work -->
-                            <p x-show="true" class="text-sm">
-                              BasicUser
-                            </p>
+                            <p class="text-gray-700 dark:text-gray-300 font-semibold">{{ group.name }}</p>
+                            <!-- Muted -->
+                            <!-- <p x-show="true" class="text-sm">
+                                  {{ group.name }}
+                                  </p> -->
                           </div>
                         </div>
                       </td>
 
-
-
-                      <td class="px-2 py-3 text-xs">
-                        <div class="flex flex-col space-y-2">
-                          <template x-if="false">
-                            <div class="flex justify-start">
-                              <span
-                                class="px-3 py-1 w-fit font-semibold leading-tight text--700 bg--100 rounded-full dark:bg--700 dark:text--100">
-
-                              </span>
-                            </div>
-                          </template>
-                          <span class="text-left"><b class="text-semibold">Last Updated:</b> 2022-05-09T00:00:00</span>
-                          <span class="text-left"><b class="text-semibold">Updated By:</b>
-                            superadmin@vertexconsult.com</span>
-                        </div>
-                      </td>
                       <td class="px-2 py-3" x-data="{ open: false }">
                         <button x-on:click="open = !open" id="dropdownDefault0" data-dropdown-toggle="dropdown0"
                           class="text-sm bg-transparent rounded-lg py-2.5 text-center inline-flex items-center"
@@ -170,321 +145,27 @@
                           <ul class="dropdown-menu py-1 text-sm text-gray-700 dark:text-gray-200"
                             aria-labelledby="dropdownDefault0" data-item="63623d15-82db-47c4-bf8b-251c59d3cd60"
                             data-medialink="">
+
                             <li><a
                                 class="menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
-                                data-action="update" href="javascript:void(0)"><i class="fa fa-pen"></i> <span> &nbsp;
-                                  Edit</span></a></li>
+                                href="{% url 'manage_groups' group.id %}"><i class="fa fa-pen"></i>
+                                <span> &nbsp;
+                                  Edit</span></a>
+                            </li>
                             <li><a
-                                class="menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
-                                data-action="delete" href="javascript:void(0)"><i class="fa fa-trash"></i> <span> &nbsp;
-                                  Delete</span></a></li>
+                                class="delete-item menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
+                                data-action="delete" 
+                                data-modal-target="popup-modal"                                 
+                                data-modal-toggle="popup-modal" href="javascript:void(0)"><i
+                                class="fa fa-trash"></i> <span> &nbsp;
+                                Delete</span></a>
+                            </li>
+
                           </ul>
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-gray-700 dark:text-gray-400 odd:bg-gray-50 dark:odd:bg-gray-700/25">
-                      <td class="px-2 py-3">
-                        <div class="">
-                          <span class="text-gray-600 dark:text-gray-400">2</span>
-                        </div>
-                      </td>
-                      <td class="px-2 py-3">
-                        <div class="flex items-center text-sm">
-                          <!-- Avatar with inset shadow -->
-                          <div x-show="false" class="relative hidden w-8 h-8 mr-4 rounded-full md:block"
-                            style="display: none;">
-                            <img x-show="false" class="object-fill w-full h-full rounded-full" src="undefined" alt=""
-                              loading="lazy" style="display: none;">
-                            <span x-show="false"
-                              class="p-2 text-xs font-semibold bg-teal-400 text-white rounded-full w-full h-full"
-                              style="display: none;">undefined</span>
-                            <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                          </div>
-                          <div class="max-w-xs">
-                            <!-- User Full Name -->
-                            <p class="text-gray-700 dark:text-gray-300 font-semibold">Staff</p>
-                            <!-- User post or work -->
-                            <p x-show="true" class="text-sm">
-                              Staff
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-
-
-
-                      <td class="px-2 py-3 text-xs">
-                        <div class="flex flex-col space-y-2">
-                          <template x-if="false">
-                            <div class="flex justify-start">
-                              <span
-                                class="px-3 py-1 w-fit font-semibold leading-tight text--700 bg--100 rounded-full dark:bg--700 dark:text--100">
-
-                              </span>
-                            </div>
-                          </template>
-                          <span class="text-left"><b class="text-semibold">Last Updated:</b>
-                            2022-05-24T21:57:07.5066667</span>
-                          <span class="text-left"><b class="text-semibold">Updated By:</b> </span>
-                        </div>
-                      </td>
-                      <td class="px-2 py-3" x-data="{ open: false }">
-                        <button x-on:click="open = !open" id="dropdownDefault1" data-dropdown-toggle="dropdown1"
-                          class="text-sm bg-transparent rounded-lg py-2.5 text-center inline-flex items-center"
-                          type="button">Choose Action
-                          <svg class="w-4 h-4 ml-2 rotate-0" :class="{'rotate-180': open, 'rotate-0': !open}"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                          </svg>
-                        </button>
-                        <div id="dropdown1"
-                          class="z-10 hidden bg-gray-100 divide-y divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700"
-                          data-popper-placement="top"
-                          style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(1505px, -54px);">
-                          <ul class="dropdown-menu py-1 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownDefault1" data-item="8859a222-6f40-4169-aab3-aa617c0c5e79"
-                            data-medialink="">
-                            <li><a
-                                class="menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
-                                data-action="update" href="javascript:void(0)"><i class="fa fa-pen"></i> <span> &nbsp;
-                                  Edit</span></a></li>
-                            <li><a
-                                class="menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
-                                data-action="delete" href="javascript:void(0)"><i class="fa fa-trash"></i> <span> &nbsp;
-                                  Delete</span></a></li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="text-gray-700 dark:text-gray-400 odd:bg-gray-50 dark:odd:bg-gray-700/25">
-                      <td class="px-2 py-3">
-                        <div class="">
-                          <span class="text-gray-600 dark:text-gray-400">3</span>
-                        </div>
-                      </td>
-                      <td class="px-2 py-3">
-                        <div class="flex items-center text-sm">
-                          <!-- Avatar with inset shadow -->
-                          <div x-show="false" class="relative hidden w-8 h-8 mr-4 rounded-full md:block"
-                            style="display: none;">
-                            <img x-show="false" class="object-fill w-full h-full rounded-full" src="undefined" alt=""
-                              loading="lazy" style="display: none;">
-                            <span x-show="false"
-                              class="p-2 text-xs font-semibold bg-teal-400 text-white rounded-full w-full h-full"
-                              style="display: none;">undefined</span>
-                            <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                          </div>
-                          <div class="max-w-xs">
-                            <!-- User Full Name -->
-                            <p class="text-gray-700 dark:text-gray-300 font-semibold">Administrator</p>
-                            <!-- User post or work -->
-                            <p x-show="true" class="text-sm">
-                              Admin
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-
-
-
-                      <td class="px-2 py-3 text-xs">
-                        <div class="flex flex-col space-y-2">
-                          <template x-if="false">
-                            <div class="flex justify-start">
-                              <span
-                                class="px-3 py-1 w-fit font-semibold leading-tight text--700 bg--100 rounded-full dark:bg--700 dark:text--100">
-
-                              </span>
-                            </div>
-                          </template>
-                          <span class="text-left"><b class="text-semibold">Last Updated:</b> 2022-05-09T00:00:00</span>
-                          <span class="text-left"><b class="text-semibold">Updated By:</b>
-                            superadmin@vertexconsult.com</span>
-                        </div>
-                      </td>
-                      <td class="px-2 py-3" x-data="{ open: false }">
-                        <button x-on:click="open = !open" id="dropdownDefault2" data-dropdown-toggle="dropdown2"
-                          class="text-sm bg-transparent rounded-lg py-2.5 text-center inline-flex items-center"
-                          type="button">Choose Action
-                          <svg class="w-4 h-4 ml-2 rotate-0" :class="{'rotate-180': open, 'rotate-0': !open}"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                          </svg>
-                        </button>
-                        <div id="dropdown2"
-                          class="z-10 hidden bg-gray-100 divide-y divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700"
-                          data-popper-placement="top"
-                          style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(1505px, 19px);"
-                          data-popper-reference-hidden="" data-popper-escaped="">
-                          <ul class="dropdown-menu py-1 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownDefault2" data-item="9c8d5a77-160a-4452-8ca1-e5fd3b03a1fc"
-                            data-medialink="">
-                            <li><a
-                                class="menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
-                                data-action="update" href="javascript:void(0)"><i class="fa fa-pen"></i> <span> &nbsp;
-                                  Edit</span></a></li>
-                            <li><a
-                                class="menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
-                                data-action="delete" href="javascript:void(0)"><i class="fa fa-trash"></i> <span> &nbsp;
-                                  Delete</span></a></li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="text-gray-700 dark:text-gray-400 odd:bg-gray-50 dark:odd:bg-gray-700/25">
-                      <td class="px-2 py-3">
-                        <div class="">
-                          <span class="text-gray-600 dark:text-gray-400">4</span>
-                        </div>
-                      </td>
-                      <td class="px-2 py-3">
-                        <div class="flex items-center text-sm">
-                          <!-- Avatar with inset shadow -->
-                          <div x-show="false" class="relative hidden w-8 h-8 mr-4 rounded-full md:block"
-                            style="display: none;">
-                            <img x-show="false" class="object-fill w-full h-full rounded-full" src="undefined" alt=""
-                              loading="lazy" style="display: none;">
-                            <span x-show="false"
-                              class="p-2 text-xs font-semibold bg-teal-400 text-white rounded-full w-full h-full"
-                              style="display: none;">undefined</span>
-                            <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                          </div>
-                          <div class="max-w-xs">
-                            <!-- User Full Name -->
-                            <p class="text-gray-700 dark:text-gray-300 font-semibold">Super Admin</p>
-                            <!-- User post or work -->
-                            <p x-show="true" class="text-sm">
-                              SuperAdmin
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-
-
-
-                      <td class="px-2 py-3 text-xs">
-                        <div class="flex flex-col space-y-2">
-                          <template x-if="false">
-                            <div class="flex justify-start">
-                              <span
-                                class="px-3 py-1 w-fit font-semibold leading-tight text--700 bg--100 rounded-full dark:bg--700 dark:text--100">
-
-                              </span>
-                            </div>
-                          </template>
-                          <span class="text-left"><b class="text-semibold">Last Updated:</b> 2022-05-09T00:00:00</span>
-                          <span class="text-left"><b class="text-semibold">Updated By:</b>
-                            superadmin@vertexconsult.com</span>
-                        </div>
-                      </td>
-                      <td class="px-2 py-3" x-data="{ open: false }">
-                        <button x-on:click="open = !open" id="dropdownDefault3" data-dropdown-toggle="dropdown3"
-                          class="text-sm bg-transparent rounded-lg py-2.5 text-center inline-flex items-center"
-                          type="button">Choose Action
-                          <svg class="w-4 h-4 ml-2 rotate-0" :class="{'rotate-180': open, 'rotate-0': !open}"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                          </svg>
-                        </button>
-                        <div id="dropdown3"
-                          class="z-10 hidden bg-gray-100 divide-y divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700"
-                          data-popper-placement="top"
-                          style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(1505px, 92px);"
-                          data-popper-reference-hidden="" data-popper-escaped="">
-                          <ul class="dropdown-menu py-1 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownDefault3" data-item="dcd36420-33ec-40b0-b468-7955b962e1a3"
-                            data-medialink="">
-                            <li><a
-                                class="menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
-                                data-action="update" href="javascript:void(0)"><i class="fa fa-pen"></i> <span> &nbsp;
-                                  Edit</span></a></li>
-                            <li><a
-                                class="menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
-                                data-action="delete" href="javascript:void(0)"><i class="fa fa-trash"></i> <span> &nbsp;
-                                  Delete</span></a></li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="text-gray-700 dark:text-gray-400 odd:bg-gray-50 dark:odd:bg-gray-700/25">
-                      <td class="px-2 py-3">
-                        <div class="">
-                          <span class="text-gray-600 dark:text-gray-400">5</span>
-                        </div>
-                      </td>
-                      <td class="px-2 py-3">
-                        <div class="flex items-center text-sm">
-                          <!-- Avatar with inset shadow -->
-                          <div x-show="false" class="relative hidden w-8 h-8 mr-4 rounded-full md:block"
-                            style="display: none;">
-                            <img x-show="false" class="object-fill w-full h-full rounded-full" src="undefined" alt=""
-                              loading="lazy" style="display: none;">
-                            <span x-show="false"
-                              class="p-2 text-xs font-semibold bg-teal-400 text-white rounded-full w-full h-full"
-                              style="display: none;">undefined</span>
-                            <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                          </div>
-                          <div class="max-w-xs">
-                            <!-- User Full Name -->
-                            <p class="text-gray-700 dark:text-gray-300 font-semibold">Project Only</p>
-                            <!-- User post or work -->
-                            <p x-show="true" class="text-sm">
-                              ProjectRole
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-
-
-
-                      <td class="px-2 py-3 text-xs">
-                        <div class="flex flex-col space-y-2">
-                          <template x-if="false">
-                            <div class="flex justify-start">
-                              <span
-                                class="px-3 py-1 w-fit font-semibold leading-tight text--700 bg--100 rounded-full dark:bg--700 dark:text--100">
-
-                              </span>
-                            </div>
-                          </template>
-                          <span class="text-left"><b class="text-semibold">Last Updated:</b>
-                            2022-06-02T00:44:08.8866667</span>
-                          <span class="text-left"><b class="text-semibold">Updated By:</b> </span>
-                        </div>
-                      </td>
-                      <td class="px-2 py-3" x-data="{ open: false }">
-                        <button x-on:click="open = !open" id="dropdownDefault4" data-dropdown-toggle="dropdown4"
-                          class="text-sm bg-transparent rounded-lg py-2.5 text-center inline-flex items-center"
-                          type="button">Choose Action
-                          <svg class="w-4 h-4 ml-2 rotate-0" :class="{'rotate-180': open, 'rotate-0': !open}"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                          </svg>
-                        </button>
-                        <div id="dropdown4"
-                          class="z-10 hidden bg-gray-100 divide-y divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700"
-                          data-popper-placement="top"
-                          style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(1505px, 165px);"
-                          data-popper-reference-hidden="" data-popper-escaped="">
-                          <ul class="dropdown-menu py-1 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownDefault4" data-item="f547c33b-9094-4ed2-b94a-6a02c00003a4"
-                            data-medialink="">
-                            <li><a
-                                class="menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
-                                data-action="update" href="javascript:void(0)"><i class="fa fa-pen"></i> <span> &nbsp;
-                                  Edit</span></a></li>
-                            <li><a
-                                class="menu-item-dropdown block p-2 mt-2 text-sm text-gray-700 dark:text-gray-300  md:mt-0 hover:text-teal-400 dark:hover:text-teal-300 focus:outline-none focus:shadow-outline hover:bg-gray-100 dark:hover:bg-gray-600"
-                                data-action="delete" href="javascript:void(0)"><i class="fa fa-trash"></i> <span> &nbsp;
-                                  Delete</span></a></li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>
@@ -503,40 +184,7 @@
     </section>
 
     <!-- Popup Modal-->
-    <div id="popup-modal" tabindex="-1"
-      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center"
-      aria-hidden="true">
-      <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <button type="button"
-            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-            data-modal-toggle="popup-modal">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </button>
-          <div class="p-6 text-center">
-            <svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor"
-              viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this
-              item?</h3>
-            <button id="btnDelConfirm" type="button"
-              class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-              Yes, I'm sure
-            </button>
-            <button id="btnTogglePopup" data-modal-toggle="popup-modal" type="button"
-              class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
-              cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    {% include '../../components/deleteModal.html' %}
 
   </div>
 </div>
