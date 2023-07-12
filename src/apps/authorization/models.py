@@ -7,6 +7,7 @@ class Role(models.Model):
 
     permissions = models.ManyToManyField(Permission,db_table='auth_role_permissions_map')
     is_active = models.BooleanField(default=True)
+    
     def __str__(self):
         return self.name
     
